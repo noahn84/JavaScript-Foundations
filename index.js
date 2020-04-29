@@ -3,10 +3,111 @@
 // 🏡 Task 1: Variables
 /* Create variables for principal, interest rate, and years. Assign them the values 200000, 0.05, and 30 respectively. Create another value called name and give it the value of your own name.
 */
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Task One ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+let principal = 200000;
+let interestRate = 0.05;
+let years = 30;
+let name = 'Noah';
 
+let monthlyInterestRate = interestRate / 12;
 
+let periods = years * 12;
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Task Two ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Task Two
+
+// M = P [ I ( 1 + I )^N ] / [ ( 1 + I )^N – 1 ]
+// P E M D A S
+// `P` = Principal amount (the total amount borrowed)
+// `I` = Interest rate on the mortgage
+// `N` = Number of periods (monthly mortgage payments)
+
+let numerator = monthlyInterestRate * Math.pow((1 + monthlyInterestRate), periods);
+
+let denominator = Math.pow((1 + monthlyInterestRate), periods) - 1;
+
+let monthlyRate = principal * (numerator / denominator);
+
+console.log(monthlyRate);
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Task Three, Four, and Five ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function mortgageCalculator(p, iR, y, n, creditScore) {
+  // variables
+  var principal = p;
+  var years = y;
+  var name = n;
+  var periods = years * 12;
+  
+  let interestRate;
+
+  // credit score algorithm
+  if (creditScore < 740 && creditScore > 660) {
+    interestRate = iR;
+  } else if (creditScore >= 740) {
+    interestRate = iR - 0.005;
+  } else if (creditScore <= 660) {
+    interestRate = iR + 0.005;
+  }
+
+  var monthlyInterestRate = interestRate / 12;
+
+  // monthly rate algorithm
+  var numerator = monthlyInterestRate * Math.pow((1 + monthlyInterestRate), periods);
+  var denominator = Math.pow((1 + monthlyInterestRate), periods) - 1;
+  var monthlyRate = principal * (numerator / denominator);
+
+  // message
+  var interestRateMessage = name + ', your monthly rate is ' + monthlyRate.toFixed(2) + '.';
+
+  // return message
+  return interestRateMessage;
+}
+
+var output = mortgageCalculator(200000, 0.05, 30, 'Noah', 300);
+
+console.log(output);
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Task Six ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+function variableInterestRate(p, iR, y, n) {
+  // variables
+  var principal = p;
+  var interestRate = iR - 0.02;
+  var years = y;
+  var name = n;
+  var monthlyInterestRate;
+  var periods = years * 12;
+
+  // monthly rate algorithm
+  var numerator;
+  var denominator;
+  var monthlyRate;
+
+  // write a for-loop that logs the monthly payment for 10 different interest rates at 0.5% increments plus or minus 2% from the inputted interest rate
+  for (var i = 1; i <= 10; i++) {
+    monthlyInterestRate = interestRate / 12;
+    numerator = monthlyInterestRate * Math.pow((1 + monthlyInterestRate), periods);
+    denominator = Math.pow((1 + monthlyInterestRate), periods) - 1;
+    monthlyRate = principal * (numerator / denominator);
+
+    // message
+    var message = name + ', with an interest rate of ' + interestRate.toFixed(3) + ', your monthly rate is $' + monthlyRate.toFixed(2) + '.';
+
+    interestRate += 0.005;
+
+    // log message
+    console.log(message);
+  }
+}
+
+var output = variableInterestRate(200000, 0.04, 30, 'Noah');
+
+console.log(output);
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ End, no stretch tasks were completed during this assignment ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // 🏡 Task 1.5: Simple Math
 /* To create a monthly mortgage rate calculator, we need to know the number of years in months and the monthly interest rate. 
@@ -46,7 +147,7 @@ If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly 
 /* Substitute the variables in your functions for parameters such that you can substitute `P`, `I`, and `N` when you call the function.
 
 For example,
-mortgageCalculator(2000000, 0.05, 30); <-- should return 1,073.64
+mortgageCalculator(200000, 0.05, 30); <-- should return 1,073.64
 */
 
 
